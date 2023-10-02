@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class SoundHandler {
 
-    public void play() {
+    public static void play(int noise) {
         File file = new File("src/main/resources/static/Voice.wav");
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
@@ -32,6 +32,7 @@ public class SoundHandler {
             while (nBytesRead != -1) {
                 try {
                     nBytesRead = audioStream.read(abData, 0, abData.length);
+                    abData = change(abData, noise);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -50,4 +51,10 @@ public class SoundHandler {
         }
     }
 
+    private static byte[] change(byte[] validData, int noise) {
+        for (int i = 0; i < validData.length ; i++) {
+            validData[i] = (byte) (validData[i]*noise);
+        }
+        return validData;
+    }
 }

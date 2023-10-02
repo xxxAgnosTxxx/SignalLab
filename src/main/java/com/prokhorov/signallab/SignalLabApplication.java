@@ -1,16 +1,16 @@
 package com.prokhorov.signallab;
 
-import com.prokhorov.signallab.sound.SoundHandler;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.Scanner;
 
-@SpringBootApplication
 public class SignalLabApplication {
+	private final static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		//SpringApplication.run(SignalLabApplication.class, args);
+		Console.start();
+		/*
 		SoundHandler handler = new SoundHandler();
-		handler.play();
+		handler.play(1);
+		handler.play(8);*/
 	}
 
 }
