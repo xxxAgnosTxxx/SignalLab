@@ -1,5 +1,6 @@
 package com.prokhorov.signallab;
 
+import com.prokhorov.signallab.image.ImageHandler;
 import com.prokhorov.signallab.sound.SoundHandler;
 
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class Console {
     }
 
     private static void setAction(int action) {
-        switch (action){
+        switch (action) {
             case 0:
                 System.exit(0);
             case 1:
@@ -50,6 +51,30 @@ public class Console {
                 SoundHandler.play(1);
                 System.out.println("Проигрывается зашумленная дорожка");
                 SoundHandler.play(noise);
+                start();
+            case 2:
+                System.out.println("Введите числовой код компонента Red (0-255):");
+                int red = scanner.nextInt();
+                if (!ImageHandler.isCorrect(red)) {
+                    setAction(2);
+                    start();
+                }
+
+                System.out.println("Введите числовой код компонента Green (0-255):");
+                int green = scanner.nextInt();
+                if (!ImageHandler.isCorrect(green)) {
+                    setAction(2);
+                    start();
+                }
+
+                System.out.println("Введите числовой код компонента Blue (0-255):");
+                int blue = scanner.nextInt();
+                if (!ImageHandler.isCorrect(blue)) {
+                    setAction(2);
+                    start();
+                }
+
+                ImageHandler.createColor(red, green, blue);
                 start();
         }
     }
