@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
-    private final static int[] actions = new int[]{0, 1, 2};
+    private final static int[] actions = new int[]{0, 1, 2, 3};
     private final static Scanner scanner = new Scanner(System.in);
 
     private Console() {
@@ -18,6 +18,7 @@ public class Console {
         System.out.println("--------------------\nВыберите лабораторную работу: ");
         System.out.println("1 - изменение звуковой дорожки;");
         System.out.println("2 - смешивание цветов;");
+        System.out.println("3 - работа с картинкой;");
         System.out.println("0 - выход;");
         setAction(tryScan(actions));
     }
@@ -75,6 +76,19 @@ public class Console {
                 }
 
                 ImageHandler.createColor(red, green, blue);
+                start();
+            case 3:
+                System.out.println("1 - сделать инверсию картинки");
+                System.out.println("2 - изменить яркость");
+                System.out.println("3 - изменить контрастность");
+                int actionLab3 = scanner.nextInt();
+                if (actionLab3 == 1) {
+                    ImageHandler.inverseColor();
+                } else if (actionLab3 == 2) {
+                    ImageHandler.changeBrightness();
+                } else {
+                    ImageHandler.changeContrast();
+                }
                 start();
         }
     }
