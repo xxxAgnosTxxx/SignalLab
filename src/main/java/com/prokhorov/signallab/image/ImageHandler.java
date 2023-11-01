@@ -10,9 +10,11 @@ import java.util.Scanner;
 public class ImageHandler {
     private static final File imageFile = new File("src/main/resources/static/Image.jpg");
     private static final File imageFile2 = new File("src/main/resources/static/img2.jpg");
-    private static final File imageFileSave2 = new File("src/main/resources/static/inverse.jpg");
-    private static final File imageFileSave22 = new File("src/main/resources/static/bright.jpg");
-    private static final File imageFileSave23 = new File("src/main/resources/static/contrast.jpg");
+    private static final File imageFile3 = new File("src/main/resources/static/img3.jpg");
+    private static final File inverse = new File("src/main/resources/static/inverse.jpg");
+    private static final File bright = new File("src/main/resources/static/bright.jpg");
+    private static final File contrast = new File("src/main/resources/static/contrast.jpg");
+    private static final File contur = new File("src/main/resources/static/contur.jpg");
 
     public static boolean isCorrect(int code) {
         if (code < 0 || code > 255) {
@@ -53,8 +55,8 @@ public class ImageHandler {
                 }
             }
 
-            ImageIO.write(bi, "jpg", imageFileSave2);
-            Desktop.getDesktop().open(imageFileSave2);
+            ImageIO.write(bi, "jpg", inverse);
+            Desktop.getDesktop().open(inverse);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -98,8 +100,8 @@ public class ImageHandler {
                     bi.setRGB(x, y, newColor.getRGB());
                 }
             }
-            ImageIO.write(bi, "jpg", imageFileSave22);
-            Desktop.getDesktop().open(imageFileSave22);
+            ImageIO.write(bi, "jpg", bright);
+            Desktop.getDesktop().open(bright);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -156,8 +158,48 @@ public class ImageHandler {
                     }
                 }
             }
-            ImageIO.write(bi, "jpg", imageFileSave23);
-            Desktop.getDesktop().open(imageFileSave23);
+            ImageIO.write(bi, "jpg", contrast);
+            Desktop.getDesktop().open(contrast);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void getContur() {
+        try {
+            BufferedImage bi = ImageIO.read(imageFile3);
+            int width = bi.getWidth();
+            int height = bi.getHeight();
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y + 1 < height; y++) {
+                    int rgbL = bi.getRGB(x, y);
+                    int rgbR = bi.getRGB(x, y + 1);
+                    if (rgbL != rgbR){
+                        bi.setRGB(x, y, new Color(255, 255, 255).getRGB());
+                        //y+=1;
+                    }
+                }
+            }
+
+            for (int x = 0; x < width; x++) {
+                for (int y = height - 1; y - 1 >= 0; y--) {
+                    int rgbL = bi.getRGB(x, y);
+                    //if(rgbL == new Color(255, 255, 255).getRGB())   continue;
+                    int rgbR = bi.getRGB(x, y - 1);
+                    if (rgbL != rgbR) bi.setRGB(x, y, new Color(255, 255, 255).getRGB());
+                }
+            }
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    int rgbL = bi.getRGB(x, y);
+                    if (rgbL != new Color(255, 255, 255).getRGB()) bi.setRGB(x, y, new Color(0, 0, 0).getRGB());
+                }
+            }
+
+            ImageIO.write(bi, "jpg", contur);
+            Desktop.getDesktop().open(contur);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

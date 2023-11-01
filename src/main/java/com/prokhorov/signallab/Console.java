@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
-    private final static int[] actions = new int[]{0, 1, 2, 3};
+    private final static int[] actions = new int[]{0, 1, 2, 3, 4};
     private final static Scanner scanner = new Scanner(System.in);
 
     private Console() {
@@ -19,6 +19,7 @@ public class Console {
         System.out.println("1 - изменение звуковой дорожки;");
         System.out.println("2 - смешивание цветов;");
         System.out.println("3 - работа с картинкой;");
+        System.out.println("4 - контуры картинки;");
         System.out.println("0 - выход;");
         setAction(tryScan(actions));
     }
@@ -89,6 +90,9 @@ public class Console {
                 } else {
                     ImageHandler.changeContrast();
                 }
+                start();
+            case 4:
+                ImageHandler.getContur();
                 start();
         }
     }
