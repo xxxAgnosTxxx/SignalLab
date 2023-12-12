@@ -11,10 +11,12 @@ public class ImageHandler {
     private static final File imageFile = new File("src/main/resources/static/Image.jpg");
     private static final File imageFile2 = new File("src/main/resources/static/img2.jpg");
     private static final File imageFile3 = new File("src/main/resources/static/img3.jpg");
+    private static final File imageFile6 = new File("src/main/resources/static/image6.jpg");
     private static final File inverse = new File("src/main/resources/static/inverse.jpg");
     private static final File bright = new File("src/main/resources/static/bright.jpg");
     private static final File contrast = new File("src/main/resources/static/contrast.jpg");
     private static final File contur = new File("src/main/resources/static/contur.jpg");
+    private static final File furie = new File("src/main/resources/static/furie.jpg");
 
     public static boolean isCorrect(int code) {
         if (code < 0 || code > 255) {
@@ -204,4 +206,18 @@ public class ImageHandler {
             throw new RuntimeException(e);
         }
     }
+
+    public static void getFurie() {
+        try {
+            BufferedImage bi = ImageIO.read(imageFile6);
+            int width = bi.getWidth();
+            int height = bi.getHeight();
+
+            Furie.getFurie(width, height, bi);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

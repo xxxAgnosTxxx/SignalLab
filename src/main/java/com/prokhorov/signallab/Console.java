@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
-    private final static int[] actions = new int[]{0, 1, 2, 3, 4};
+    private final static int[] actions = new int[]{0, 1, 2, 3, 4, 5, 6};
     private final static Scanner scanner = new Scanner(System.in);
 
     private Console() {
@@ -20,6 +20,8 @@ public class Console {
         System.out.println("2 - смешивание цветов;");
         System.out.println("3 - работа с картинкой;");
         System.out.println("4 - контуры картинки;");
+        System.out.println("5 - скремблер;");
+        System.out.println("6 - разложение Фурье;");
         System.out.println("0 - выход;");
         setAction(tryScan(actions));
     }
@@ -93,6 +95,15 @@ public class Console {
                 start();
             case 4:
                 ImageHandler.getContur();
+                start();
+            case 5:
+                System.out.println("Проигрывается обычная дорожка");
+                SoundHandler.play(1);
+                System.out.println("Скремблер");
+                SoundHandler.scramble();
+                start();
+            case 6:
+                ImageHandler.getFurie();
                 start();
         }
     }
