@@ -212,8 +212,17 @@ public class ImageHandler {
             BufferedImage bi = ImageIO.read(imageFile6);
             int width = bi.getWidth();
             int height = bi.getHeight();
+            double[][] res = Furie.getFurie(width, height, bi);
 
-            Furie.getFurie(width, height, bi);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    if (res[x][y] == 0) bi.setRGB(x, y, new Color(255, 255, 255).getRGB());
+                    else bi.setRGB(x, y, new Color(0, 0, 0).getRGB());
+                }
+            }
+
+            ImageIO.write(bi, "jpg", furie);
+            Desktop.getDesktop().open(furie);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
